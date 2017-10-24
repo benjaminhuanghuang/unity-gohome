@@ -17,4 +17,13 @@ public class PlayerMovement : MonoBehaviour {
 		Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 		characterController.SimpleMove(moveDirection * moveSpeed);
 	}
+
+	void OnCollisionEnter(Collision other)
+	{
+		if(other.transform.tag == "Enemy")
+		{
+
+		}
+	}
 }
+·
