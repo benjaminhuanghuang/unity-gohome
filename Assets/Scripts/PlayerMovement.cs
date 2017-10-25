@@ -5,10 +5,13 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 	public float moveSpeed;
 	private CharacterController characterController;
+	public GameObject deathParticles;
+	private Vector3 spawn;
 
 	// Use this for initialization
 	void Start () {
 		characterController = GetComponent<CharacterController>();
+		spawn = transform.position;
 	}
 	
 	// Update is called once per frame
@@ -22,8 +25,12 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		if(other.transform.tag == "Enemy")
 		{
-
+			Die();
 		}
 	}
+
+	void Die(){
+		Instantiate(deathParticles, transform.position, Quaternion.Euler(270, 0, 0));
+		transform.position = spawn;
+	}
 }
-·
