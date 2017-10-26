@@ -3,25 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
-	public float moveSpeed;
+	private Rigidbody rb;
 	private float maxSpeed = 10f;
 	private Vector3 spawn;
 
+	public float moveSpeed;
 	public GameObject deathParticles;
 	
 	// Use this for initialization
 	void Start () {
 		spawn = transform.position;
+		rb = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-		if(GetComponent<Rigidbody>().velocity.magnitude < maxSpeed)
+	
+	}
+	void FixedUpdate ()
+	{
+		
+		if(rb.velocity.magnitude < maxSpeed)
 		{
-			Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+			float moveHorizontal = Input.GetAxis ("Horizontal");
+			float moveVertical = Input.GetAxis ("Vertical");
+
+			Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 			// GetComponent<Rigidbody>().velocity = movement * moveSpeed; 
-			GetComponent<Rigidbody>().AddRelativeForce(movement * moveSpeed);  // based on player's rotation
+			rb.AddRelativeForce(movement * moveSpeed);  // based on player's rotation
 		}
 
 		if(transform.position.y < -2)
