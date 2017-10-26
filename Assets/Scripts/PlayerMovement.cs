@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 	public float moveSpeed;
 	private CharacterController characterController;
-	public GameObject deathParticles;
 	private Vector3 spawn;
 
+	public GameObject deathParticles;
+	
 	// Use this for initialization
 	void Start () {
 		characterController = GetComponent<CharacterController>();
@@ -25,7 +26,9 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		if(other.transform.tag == "Enemy")
 		{
-			Die();
+			print("Colision");
+			Instantiate(deathParticles, transform.position, Quaternion.Euler(270, 0, 0));
+			transform.position = spawn;
 		}
 	}
 
